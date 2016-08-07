@@ -11,10 +11,9 @@
             <p:messages autoUpdate="true"/>
             <p:panelGrid columns="2">
                 <p:outputLabel value="Login" for="login"/>
-                <h:panelGroup>
-                    <p:inputText id="login" value="#{cadastroUsuarioBean.login}" required="true"/>
-                    <p:commandButton process="login @this" value="Verificar disponibilidade" action="#{cadastroUsuarioBean.verficarDisponibilidadeLogin()}"/>
-                </h:panelGroup>
+                <p:inputText id="login" value="#{cadastroUsuarioBean.login}" required="true">
+                    <p:ajax listener="#{cadastroUsuarioBean.verficarDisponibilidadeLogin()}" event="change" process="@this"/> <!--Não precisa especificar event="change" process="@this"-->
+                </p:inputText>
                 <p:outputLabel value="Nome" for="nome"/>
                 <p:inputText id="nome" value="#{cadastroUsuarioBean.nome}" required="true"/>
 

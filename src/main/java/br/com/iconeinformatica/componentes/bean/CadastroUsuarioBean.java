@@ -21,6 +21,21 @@ public class CadastroUsuarioBean implements Serializable {
     private String nome;
     private String login;
     
+    public void verficarDisponibilidadeLogin() {
+        FacesMessage msg;
+        System.out.println("verificando disponibilidade: " + this.login);
+        
+        if("gleywson".equals(this.login)) {
+            msg = new FacesMessage("Login já está em uso!");
+            msg.setSeverity(FacesMessage.SEVERITY_WARN);
+        } else {
+            msg = new FacesMessage("Login disponível.");
+            msg.setSeverity(FacesMessage.SEVERITY_INFO);
+        }
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        
+    }
+    
     public void cadastrar() {
         System.out.println("Login: " + login);
         System.out.println("Nome: " + nome);

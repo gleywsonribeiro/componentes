@@ -59,17 +59,23 @@ public class PerfilUsuarioBean implements Serializable {
     
     public void carregarCidades() {
         cidades.clear();
-        if("PA".equals(estado)) {
-            cidades.add("Abaetetuba");
-            cidades.add("Belém");
-            cidades.add("Barcarena");
-        } else if ("MG".equals(estado)) {
-            cidades.add("Blumenau");
-            cidades.add("Belo Horizonte");
-        } else if ("SP".equals(estado)) {
-            cidades.add("São Paulo");
-            cidades.add("Cubatão");
-            cidades.add("Guarulhos");
+        if(null != estado) switch (estado) {
+            case "PA":
+                cidades.add("Abaetetuba");
+                cidades.add("Belém");
+                cidades.add("Barcarena");
+                break;
+            case "MG":
+                cidades.add("Blumenau");
+                cidades.add("Belo Horizonte");
+                break;
+            case "SP":
+                cidades.add("São Paulo");
+                cidades.add("Cubatão");
+                cidades.add("Guarulhos");
+                break;
+            default:
+                break;
         }
         
     }

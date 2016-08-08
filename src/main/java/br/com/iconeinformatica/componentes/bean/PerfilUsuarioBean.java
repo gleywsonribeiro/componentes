@@ -21,7 +21,7 @@ import javax.faces.context.FacesContext;
 @Named(value = "perfilUsuarioBean")
 @SessionScoped
 public class PerfilUsuarioBean implements Serializable {
-    protected static final List<Interesse> INTERESSES = new ArrayList<>();
+    public static final List<Interesse> INTERESSES = new ArrayList<>();
     
     static {
         INTERESSES.add(new Interesse("Esportes", "esportes"));

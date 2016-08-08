@@ -21,19 +21,53 @@ import javax.faces.context.FacesContext;
 @Named(value = "perfilUsuarioBean")
 @SessionScoped
 public class PerfilUsuarioBean implements Serializable {
+    protected static final List<Interesse> INTERESSES = new ArrayList<>();
+    
+    static {
+        INTERESSES.add(new Interesse("Esportes", "esportes"));
+        INTERESSES.add(new Interesse("Cinema", "cinema"));
+        INTERESSES.add(new Interesse("Computação", "computacao"));
+        INTERESSES.add(new Interesse("Leitura", "leitura"));
+    }
+    
     private String login;
     private String senha;
     private String nome;
     private String sobre;
     private Date dataNascimento;
+    private String profissao;
+    private Interesse interesse;
     
     public void atualizar() {
         System.out.println("Senha: " + this.senha);
         System.out.println("Sobre: " + this.sobre);
-        System.out.println("Data de Nascimento " + this.dataNascimento);
+        System.out.println("Data de Nascimento: " + this.dataNascimento);
+        System.out.println("Profissão: " + this.profissao);
+        System.out.println("Interesse: " + this.interesse.getDescricao());
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Perfil Atualizado"));
     }
 
+    public Interesse getInteresse() {
+        return interesse;
+    }
+
+    public List<Interesse> getInteresses() {
+        return INTERESSES;
+    }
+    
+    public void setInteresse(Interesse interesse) {
+        this.interesse = interesse;
+    }
+
+    public String getProfissao() {
+        return profissao;
+    }
+
+    public void setProfissao(String profissao) {
+        this.profissao = profissao;
+    }
+
+    
     public Date getDataNascimento() {
         return dataNascimento;
     }

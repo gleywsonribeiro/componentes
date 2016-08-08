@@ -30,6 +30,9 @@ public class PerfilUsuarioBean implements Serializable {
         INTERESSES.add(new Interesse("Leitura", "leitura"));
     }
     
+    private List<String> estados = new ArrayList<>();
+    private List<String> cidades = new ArrayList<>();
+    
     private String login;
     private String senha;
     private String nome;
@@ -37,14 +40,64 @@ public class PerfilUsuarioBean implements Serializable {
     private Date dataNascimento;
     private String profissao;
     private Interesse interesse;
+    private String estado;
+    private String cidade;
+
+    public PerfilUsuarioBean() {
+        estados.add("PA");
+        estados.add("MG");
+        estados.add("SP");
+    }
+
+    public List<String> getEstados() {
+        return estados;
+    }
+
+    public List<String> getCidades() {
+        return cidades;
+    }
     
+    public void carregarCidades() {
+        cidades.clear();
+        if("PA".equals(estado)) {
+            cidades.add("Abaetetuba");
+            cidades.add("Belém");
+            cidades.add("Barcarena");
+        } else if ("MG".equals(estado)) {
+            cidades.add("Blumenau");
+            cidades.add("Belo Horizonte");
+        } else if ("SP".equals(estado)) {
+            cidades.add("São Paulo");
+            cidades.add("Cubatão");
+            cidades.add("Guarulhos");
+        }
+        
+    }
     public void atualizar() {
-        System.out.println("Senha: " + this.senha);
-        System.out.println("Sobre: " + this.sobre);
-        System.out.println("Data de Nascimento: " + this.dataNascimento);
-        System.out.println("Profissão: " + this.profissao);
-        System.out.println("Interesse: " + this.interesse.getDescricao());
+//        System.out.println("Senha: " + this.senha);
+//        System.out.println("Sobre: " + this.sobre);
+//        System.out.println("Data de Nascimento: " + this.dataNascimento);
+//        System.out.println("Profissão: " + this.profissao);
+//        System.out.println("Interesse: " + this.interesse.getDescricao());
+        System.out.println("Estado: " + this.estado);
+        System.out.println("Cidade: " + this.cidade);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Perfil Atualizado"));
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
     }
 
     public Interesse getInteresse() {

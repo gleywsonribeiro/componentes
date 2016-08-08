@@ -8,6 +8,8 @@ package br.com.iconeinformatica.componentes.bean;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
@@ -20,11 +22,46 @@ import javax.faces.context.FacesContext;
 public class PerfilUsuarioBean implements Serializable {
     private String login;
     private String senha;
+    private String nome;
+    private String sobre;
     
     public void atualizar() {
-        System.out.println("Senha: " + this.senha);
+//        System.out.println("Senha: " + this.senha);
+        System.out.println("Sobre: " + this.sobre);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Perfil Atualizado"));
     }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    
+    public List<String> completarTexto(String consulta) {
+        List<String> resultados = new ArrayList<>();
+        
+        if(consulta.startsWith("Gle")) {
+            resultados.add("Gleywson");
+            resultados.add("Gleywson Ribeiro");
+            resultados.add("Gleywson da Conceição Ribeiro");
+            resultados.add("Gleywson do Metropolitano");
+            resultados.add("Gleywson da Raquel");
+        }
+        
+        return resultados; 
+    }
+
+    public String getSobre() {
+        return sobre;
+    }
+
+    public void setSobre(String sobre) {
+        this.sobre = sobre;
+    }
+    
+    
 
     public String getLogin() {
         return login;

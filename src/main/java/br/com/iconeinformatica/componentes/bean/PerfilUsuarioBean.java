@@ -42,6 +42,8 @@ public class PerfilUsuarioBean implements Serializable {
     private Interesse interesse;
     private String estado;
     private String cidade;
+    private String sexo;
+    private String estadoCivil;
 
     public PerfilUsuarioBean() {
         estados.add("PA");
@@ -55,6 +57,22 @@ public class PerfilUsuarioBean implements Serializable {
 
     public List<String> getCidades() {
         return cidades;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    public String getEstadoCivil() {
+        return estadoCivil;
+    }
+
+    public void setEstadoCivil(String estadoCivil) {
+        this.estadoCivil = estadoCivil;
     }
     
     public void carregarCidades() {
@@ -85,8 +103,8 @@ public class PerfilUsuarioBean implements Serializable {
 //        System.out.println("Data de Nascimento: " + this.dataNascimento);
 //        System.out.println("Profissão: " + this.profissao);
 //        System.out.println("Interesse: " + this.interesse.getDescricao());
-        System.out.println("Estado: " + this.estado);
-        System.out.println("Cidade: " + this.cidade);
+        System.out.println("sexo: " + this.sexo);
+        System.out.println("Estado civil: " + this.estadoCivil);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Perfil Atualizado"));
     }
 

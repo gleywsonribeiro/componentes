@@ -32,6 +32,7 @@ public class PerfilUsuarioBean implements Serializable {
     
     private List<String> estados = new ArrayList<>();
     private List<String> cidades = new ArrayList<>();
+    private List<String> interessesDoUsuario = new ArrayList<>();
     
     private String login;
     private String senha;
@@ -103,13 +104,24 @@ public class PerfilUsuarioBean implements Serializable {
 //        System.out.println("Data de Nascimento: " + this.dataNascimento);
 //        System.out.println("Profissão: " + this.profissao);
 //        System.out.println("Interesse: " + this.interesse.getDescricao());
-        System.out.println("sexo: " + this.sexo);
-        System.out.println("Estado civil: " + this.estadoCivil);
+//        System.out.println("sexo: " + this.sexo);
+//        System.out.println("Estado civil: " + this.estadoCivil);
+        for (String i : interessesDoUsuario) {
+            System.out.println("Interesse: " + i);
+        }
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Perfil Atualizado"));
     }
 
     public String getEstado() {
         return estado;
+    }
+
+    public List<String> getInteressesDoUsuario() {
+        return interessesDoUsuario;
+    }
+
+    public void setInteressesDoUsuario(List<String> interessesDoUsuario) {
+        this.interessesDoUsuario = interessesDoUsuario;
     }
 
     public void setEstado(String estado) {

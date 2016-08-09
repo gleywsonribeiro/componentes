@@ -34,6 +34,8 @@ public class PerfilUsuarioBean implements Serializable {
     private List<String> cidades = new ArrayList<>();
     private List<String> interessesDoUsuario = new ArrayList<>();
     
+    private List<String> paises = new ArrayList<>();
+    
     private String login;
     private String senha;
     private String nome;
@@ -45,11 +47,22 @@ public class PerfilUsuarioBean implements Serializable {
     private String cidade;
     private String sexo;
     private String estadoCivil;
+    private String pais;
 
     public PerfilUsuarioBean() {
         estados.add("PA");
         estados.add("MG");
         estados.add("SP");
+        paises.add("Brasil");
+        paises.add("Bélgica");
+        paises.add("Colômbia");
+        paises.add("Dinamarca");
+        paises.add("Chile");
+        paises.add("Espanha");
+        paises.add("França");
+        paises.add("Alemanha");
+        paises.add("Argélia");
+        paises.add("Armênia");
     }
 
     public List<String> getEstados() {
@@ -66,6 +79,14 @@ public class PerfilUsuarioBean implements Serializable {
 
     public void setSexo(String sexo) {
         this.sexo = sexo;
+    }
+
+    public String getPais() {
+        return pais;
+    }
+
+    public void setPais(String pais) {
+        this.pais = pais;
     }
 
     public String getEstadoCivil() {
@@ -217,5 +238,14 @@ public class PerfilUsuarioBean implements Serializable {
         this.senha = senha;
     }
     
-    
+    public List<String> sugerirPaises(String consulta) {
+        System.out.println("Consultando: " + consulta);
+        List<String> paisesSugeridos = new ArrayList<>();
+        for(String paisIndex:this.paises) {
+            if(paisIndex.toLowerCase().startsWith(consulta.toLowerCase())) {
+                paisesSugeridos.add(paisIndex);
+            }
+        }
+        return paisesSugeridos;
+    }
 }

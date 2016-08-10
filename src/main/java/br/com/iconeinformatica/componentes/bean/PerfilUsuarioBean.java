@@ -23,9 +23,10 @@ import javax.faces.context.FacesContext;
 @Named(value = "perfilUsuarioBean")
 @SessionScoped
 public class PerfilUsuarioBean implements Serializable {
+
     public static final List<Interesse> INTERESSES = new ArrayList<>();
     public static final List<Pais> PAISES = new ArrayList<>();
-    
+
     static {
         PAISES.add(new Pais(1, "Argélia"));
         PAISES.add(new Pais(2, "Armênia"));
@@ -37,23 +38,26 @@ public class PerfilUsuarioBean implements Serializable {
         PAISES.add(new Pais(9, "Rússia"));
         PAISES.add(new Pais(10, "Alemanha"));
     }
-    
+
     static {
         INTERESSES.add(new Interesse("Esportes", "esportes"));
         INTERESSES.add(new Interesse("Cinema", "cinema"));
         INTERESSES.add(new Interesse("Computação", "computacao"));
         INTERESSES.add(new Interesse("Leitura", "leitura"));
     }
-    
+
     private List<String> estados = new ArrayList<>();
     private List<String> cidades = new ArrayList<>();
     private List<String> interessesDoUsuario = new ArrayList<>();
-    
+
     private List<String> paises = new ArrayList<>();
-    
+
     private String login;
     private String senha;
     private String nome;
+    private String telefone;
+    private String telefoneComercial;
+    private String matricula;
     private String sobre;
     private Date dataNascimento;
     private String profissao;
@@ -104,6 +108,30 @@ public class PerfilUsuarioBean implements Serializable {
         this.paises = paises;
     }
 
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getTelefoneComercial() {
+        return telefoneComercial;
+    }
+
+    public void setTelefoneComercial(String telefoneComercial) {
+        this.telefoneComercial = telefoneComercial;
+    }
+
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+
     public Pais getPais() {
         return pais;
     }
@@ -119,29 +147,32 @@ public class PerfilUsuarioBean implements Serializable {
     public void setEstadoCivil(String estadoCivil) {
         this.estadoCivil = estadoCivil;
     }
-    
+
     public void carregarCidades() {
         cidades.clear();
-        if(null != estado) switch (estado) {
-            case "PA":
-                cidades.add("Abaetetuba");
-                cidades.add("Belém");
-                cidades.add("Barcarena");
-                break;
-            case "MG":
-                cidades.add("Blumenau");
-                cidades.add("Belo Horizonte");
-                break;
-            case "SP":
-                cidades.add("São Paulo");
-                cidades.add("Cubatão");
-                cidades.add("Guarulhos");
-                break;
-            default:
-                break;
+        if (null != estado) {
+            switch (estado) {
+                case "PA":
+                    cidades.add("Abaetetuba");
+                    cidades.add("Belém");
+                    cidades.add("Barcarena");
+                    break;
+                case "MG":
+                    cidades.add("Blumenau");
+                    cidades.add("Belo Horizonte");
+                    break;
+                case "SP":
+                    cidades.add("São Paulo");
+                    cidades.add("Cubatão");
+                    cidades.add("Guarulhos");
+                    break;
+                default:
+                    break;
+            }
         }
-        
+
     }
+
     public void atualizar() {
 //        System.out.println("Senha: " + this.senha);
 //        System.out.println("Sobre: " + this.sobre);
@@ -150,17 +181,18 @@ public class PerfilUsuarioBean implements Serializable {
 //        System.out.println("Interesse: " + this.interesse.getDescricao());
 //        System.out.println("sexo: " + this.sexo);
 //        System.out.println("Estado civil: " + this.estadoCivil);
-        for (String i : interessesDoUsuario) {
-            System.out.println("Interesse: " + i);
-        }
-        if(this.pais == null) {
-            addMessage("Perfil atualizado sem país");
-        } else {
-            addMessage("Perfil atualizado com país: " + pais.getNome() +
-                    "(" + this.pais.getCodigo() + ")");
-        }
+//        for (String i : interessesDoUsuario) {
+//            System.out.println("Interesse: " + i);
+//        }
+//        if(this.pais == null) {
+//            addMessage("Perfil atualizado sem país");
+//        } else {
+//            addMessage("Perfil atualizado com país: " + pais.getNome() +
+//                    "(" + this.pais.getCodigo() + ")");
+//        }
+        addMessage("Atualizado com sucesso!");
     }
-    
+
     private void addMessage(String msg) {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(msg));
     }
@@ -196,7 +228,7 @@ public class PerfilUsuarioBean implements Serializable {
     public List<Interesse> getInteresses() {
         return INTERESSES;
     }
-    
+
     public void setInteresse(Interesse interesse) {
         this.interesse = interesse;
     }
@@ -209,15 +241,14 @@ public class PerfilUsuarioBean implements Serializable {
         this.profissao = profissao;
     }
 
-    
     public Date getDataNascimento() {
         return dataNascimento;
     }
-    
+
     public Date getDataHoje() {
         return new Date();
     }
-    
+
     public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
@@ -229,19 +260,19 @@ public class PerfilUsuarioBean implements Serializable {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    
+
     public List<String> completarTexto(String consulta) {
         List<String> resultados = new ArrayList<>();
-        
-        if(consulta.startsWith("Gle")) {
+
+        if (consulta.startsWith("Gle")) {
             resultados.add("Gleywson");
             resultados.add("Gleywson Ribeiro");
             resultados.add("Gleywson da Conceição Ribeiro");
             resultados.add("Gleywson do Metropolitano");
             resultados.add("Gleywson da Raquel");
         }
-        
-        return resultados; 
+
+        return resultados;
     }
 
     public String getSobre() {
@@ -251,8 +282,6 @@ public class PerfilUsuarioBean implements Serializable {
     public void setSobre(String sobre) {
         this.sobre = sobre;
     }
-    
-    
 
     public String getLogin() {
         return login;
@@ -269,23 +298,23 @@ public class PerfilUsuarioBean implements Serializable {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-    
+
     public List<String> sugerirPaises(String consulta) {
         System.out.println("Consultando: " + consulta);
         List<String> paisesSugeridos = new ArrayList<>();
-        for(String paisIndex:this.paises) {
-            if(paisIndex.toLowerCase().startsWith(consulta.toLowerCase())) {
+        for (String paisIndex : this.paises) {
+            if (paisIndex.toLowerCase().startsWith(consulta.toLowerCase())) {
                 paisesSugeridos.add(paisIndex);
             }
         }
         return paisesSugeridos;
     }
-    
+
     public List<Pais> sugerirPaisesPOJO(String consulta) {
-        
+
         List<Pais> paisesSugeridos = new ArrayList<>();
-        for(Pais paisIndex:PAISES) {
-            if(paisIndex.getNome().toLowerCase().startsWith(consulta.toLowerCase())) {
+        for (Pais paisIndex : PAISES) {
+            if (paisIndex.getNome().toLowerCase().startsWith(consulta.toLowerCase())) {
                 paisesSugeridos.add(paisIndex);
             }
         }

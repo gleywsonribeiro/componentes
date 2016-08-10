@@ -23,12 +23,23 @@ public class UsuarioBean implements Serializable {
     private String telefone;
     private String telefoneComercial;
     private String matricula;
-
+    
+    private boolean aceito;
+    
     public UsuarioBean() {
     }
+  
 
     public String getNome() {
         return nome;
+    }
+
+    public boolean isAceito() {
+        return aceito;
+    }
+
+    public void setAceito(boolean aceito) {
+        this.aceito = aceito;
     }
 
     public void setNome(String nome) {
@@ -60,10 +71,10 @@ public class UsuarioBean implements Serializable {
     }
     
     public void atualizar() {
-        System.out.println("Nome: " + this.nome);
-        System.out.println("Telefone:" + this.telefone);
-        System.out.println("Telefone Comercial:" + this.telefoneComercial);
-        System.out.println("Matrícula:" + this.matricula);
+        System.out.println("Aceito: " + this.aceito);
+//        System.out.println("Telefone:" + this.telefone);
+//        System.out.println("Telefone Comercial:" + this.telefoneComercial);
+//        System.out.println("Matrícula:" + this.matricula);
         
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Atualizado com sucesso!"));
     }

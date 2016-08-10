@@ -5,6 +5,8 @@
  */
 package br.com.iconeinformatica.componentes.bean;
 
+import br.com.iconeinformatica.componentes.modelo.Interesse;
+import br.com.iconeinformatica.componentes.modelo.Pais;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -22,6 +24,19 @@ import javax.faces.context.FacesContext;
 @SessionScoped
 public class PerfilUsuarioBean implements Serializable {
     public static final List<Interesse> INTERESSES = new ArrayList<>();
+    public static final List<Pais> PAISES = new ArrayList<>();
+    
+    static {
+        PAISES.add(new Pais(1, "Argélia"));
+        PAISES.add(new Pais(2, "Armênia"));
+        PAISES.add(new Pais(3, "Belize"));
+        PAISES.add(new Pais(4, "Brasil"));
+        PAISES.add(new Pais(5, "Bósnia Hezergovina"));
+        PAISES.add(new Pais(6, "Estados Unidos"));
+        PAISES.add(new Pais(7, "Austrália"));
+        PAISES.add(new Pais(9, "Rússia"));
+        PAISES.add(new Pais(10, "Alemanha"));
+    }
     
     static {
         INTERESSES.add(new Interesse("Esportes", "esportes"));
@@ -46,8 +61,8 @@ public class PerfilUsuarioBean implements Serializable {
     private String estado;
     private String cidade;
     private String sexo;
+    private Pais pais;
     private String estadoCivil;
-    private String pais;
 
     public PerfilUsuarioBean() {
         estados.add("PA");
@@ -81,11 +96,19 @@ public class PerfilUsuarioBean implements Serializable {
         this.sexo = sexo;
     }
 
-    public String getPais() {
+    public List<String> getPaises() {
+        return paises;
+    }
+
+    public void setPaises(List<String> paises) {
+        this.paises = paises;
+    }
+
+    public Pais getPais() {
         return pais;
     }
 
-    public void setPais(String pais) {
+    public void setPais(Pais pais) {
         this.pais = pais;
     }
 
@@ -130,7 +153,16 @@ public class PerfilUsuarioBean implements Serializable {
         for (String i : interessesDoUsuario) {
             System.out.println("Interesse: " + i);
         }
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Perfil Atualizado"));
+        if(this.pais == null) {
+            addMessage("Perfil atualizado sem país");
+        } else {
+            addMessage("Perfil atualizado com país: " + pais.getNome() +
+                    "(" + this.pais.getCodigo() + ")");
+        }
+    }
+    
+    private void addMessage(String msg) {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(msg));
     }
 
     public String getEstado() {
@@ -243,6 +275,17 @@ public class PerfilUsuarioBean implements Serializable {
         List<String> paisesSugeridos = new ArrayList<>();
         for(String paisIndex:this.paises) {
             if(paisIndex.toLowerCase().startsWith(consulta.toLowerCase())) {
+                paisesSugeridos.add(paisIndex);
+            }
+        }
+        return paisesSugeridos;
+    }
+    
+    public List<Pais> sugerirPaisesPOJO(String consulta) {
+        
+        List<Pais> paisesSugeridos = new ArrayList<>();
+        for(Pais paisIndex:PAISES) {
+            if(paisIndex.getNome().toLowerCase().startsWith(consulta.toLowerCase())) {
                 paisesSugeridos.add(paisIndex);
             }
         }
